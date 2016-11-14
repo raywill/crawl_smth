@@ -8,25 +8,41 @@ import time
 import random
 import time
 
+
+
+#################### 配置开始#################
+
+# 版面配置
+# 支持爬多个版面，取消下面的注释即可
+# 二手房
+# board = 'OurHouse'
+# 二手市场主版
+# board = 'SecondMarket'
+# 租房
+board = 'HouseRent'
+
+# 关注关键词文件
+keywordsFile = '/home/wwwroot/www.reactshare.cn/rent/keywords.txt'
+
+# 爬虫结果文件，简易放入 http 服务目录中
+outputFile = '/home/wwwroot/www.reactshare.cn/rent/index.html'
+
+# 结果通知地址, 用于通知爬虫执行完毕，可查看结果
+notifyUrl = "http://m.reactshare.cn/rent"
+
+################### 配置结束#################
+
+
+
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-# 支持爬多个版面，取消下面的注释即可
-
-# 二手房
-# board = 'OurHouse'
-
-# 二手市场主版
-# board = 'SecondMarket'
-
-# 租房
-board = 'HouseRent'
 
 keywords = []
 matched = []
 final = []
 
-for kw in open('/home/wwwroot/www.reactshare.cn/rent/keywords.txt').readlines():
+for kw in open(keywordsFile).readlines():
     keywords.append(kw.strip())
 
 # print keywords[0]
@@ -55,11 +71,10 @@ html += "<br/>".join(final)
 html += "<p>last update at %s </p><p><a href='http://m.newsmth.net/board/%s'>水木社区</a></p>" % (time.strftime('%Y-%m-%d %X', time.localtime()), board)
 html += "</body></html>"
 
-output = open('/home/wwwroot/www.reactshare.cn/rent/index.html', 'w')
+output = open(outputFile, 'w')
 output.write(html)
 output.close()
 
 # notify
-notifyUrl = "http://m.reactshare.cn/rent"
 data = urllib.urlopen(notifyUrl).read()
 
