@@ -30,6 +30,9 @@ outputFile = '/home/wwwroot/www.reactshare.cn/rent/index.html'
 # 结果通知地址, 用于通知爬虫执行完毕，可查看结果
 notifyUrl = "http://m.reactshare.cn/rent"
 
+# 最多爬的页数
+maxCrawlPage = 20
+
 ################### 配置结束#################
 
 
@@ -50,7 +53,7 @@ for kw in open(keywordsFile).readlines():
 
 #soup = BeautifulSoup(open('pg2.html'), "html5lib")
 
-for page in range(1, 10):
+for page in range(1, maxCrawlPage):
     url = 'http://m.newsmth.net/board/%s?p=%s' % (board, page)
     data = urllib.urlopen(url).read()
     # print data
