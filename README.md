@@ -13,7 +13,7 @@
 - git clone https://github.com/raywill/crawl_smth
 
 # 修改
-- 修改代码中的路径为自己的实际路径，简易放到 http 服务器路径下，这样可以通过网络直接浏览爬得得结果
+- 修改代码中的路径为自己的实际路径，建议放到 http 服务器路径下，便于通过网络直接浏览爬虫结果
 
 # 运行
 - python rent_crawl.py
