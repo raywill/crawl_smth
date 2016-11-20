@@ -19,7 +19,7 @@
 - python rent_crawl.py
 
 # 预览效果
-![爬虫效果预览](sample.png)
+<img src="sample.png" height="400px" title="预览" />
 
 # 扩展
 根据您自己的服务器环境，您可以增加如下扩展功能：
