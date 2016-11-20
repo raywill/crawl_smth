@@ -38,7 +38,7 @@ lastCopy = '/home/wwwroot/www.reactshare.cn/rent/last.html'
 notifyUrl = "http://m.reactshare.cn/rent"
 
 # 最多爬的页数
-maxCrawlPage = 20
+maxCrawlPage = 30
 
 ################### 配置结束#################
 
@@ -85,14 +85,18 @@ for item in matched:
 
 # 输出网页
 html = "<html><head><meta charset='UTF-8' /><title>租房</title><base href='http://m.newsmth.net/' /></head><body>"
+html += "<style> a:visited {color:gray;} a:active {color:red;} a {color:blue;}</style>"
 html += "<br/>".join(final)
-html += "<p>last update at %s </p><p><a href='http://m.newsmth.net/board/%s'>水木社区</a></p>" % (time.strftime('%Y-%m-%d %X', time.localtime()), board)
+html += "<p>%d items updated at %s </p><p><a href='http://m.newsmth.net/board/%s'>水木社区</a></p>" % (len(final), time.strftime('%Y-%m-%d %X', time.localtime()), board)
 html += "</body></html>"
 
 output = open(outputFile, 'w')
 output.write(html)
 output.close()
 
+
+# 为了避免无聊的人反复顶贴，做一次排序
+final.sort()
 
 # 检查本次爬得得数据是否有更新
 if os.path.exists(lastCopy) and "|".join(final).strip() == open(lastCopy).readline().strip() :
@@ -105,7 +109,5 @@ tmp.close()
 
 # notify
 data = urllib.urlopen(notifyUrl).read()
-
-
 
 
