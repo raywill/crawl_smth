@@ -101,7 +101,7 @@ if os.path.exists(lastCopy):
     last=[]
     for item in open(lastCopy).readlines():
         last.append(item.strip())
-    union=list(set(final).union(set(last)))
+    union=list(set(last).union(set(final)))
     diff=list(set(union) ^ set(last))
     if len(diff) == 0 :
         sys.exit(0)
