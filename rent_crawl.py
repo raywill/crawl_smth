@@ -73,6 +73,7 @@ for kw in open(blacklistFile).readlines():
     blacklist.append(kw.strip())
 
 for board in boards:
+    # continue
     for page in range(1, maxCrawlPage):
         url = 'http://m.newsmth.net/board/%s?p=%s' % (board, page)
         data = urllib.urlopen(url).read()
@@ -113,9 +114,15 @@ tmp.close()
 
 # 输出网页
 
+# 重新按照关键词分类来渲染页面
+
 html = "<html><head><meta charset='UTF-8' /><meta name='viewport' content='width=device-width,user-scalable=yes'><meta name='apple-mobile-web-app-capable' content='yes'><title>水木爬爬</title><base href='http://m.newsmth.net/' /></head><body>"
 html += "<style> a:visited {color:gray;} a:active {color:red;} a {color:blue;}</style>"
-html += "<br/>".join(union)
+for kw in keywords:
+    html += "<h2> %s </h2>" % (kw)
+    for item in union:
+        if item.find(kw) >= 0:
+            html += "%s<br/>" % (item)
 html += "<hr />"
 for board in boards:
     html += "<p><a href='http://m.newsmth.net/board/%s'>%s</a></p>" % (board, board)
